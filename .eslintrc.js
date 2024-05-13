@@ -9,9 +9,10 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['prettier'],
+  plugins: ['prettier', 'eslint-plugin-import'],
   rules: {
     'prettier/prettier': 'error',
+    'import/order': 'error',
   },
   ignorePatterns: ['.yarn/**/*', 'dist/**/*', 'node_modules/**/*'],
   overrides: [
