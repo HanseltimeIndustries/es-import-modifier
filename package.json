@@ -1,20 +1,21 @@
 {
-  "name": "@hanseltime/your-package-here",
-  "description": "add your description here",
+  "name": "@hanseltime/es-import-modifier",
+  "description": "A package that provides methods for updating commonjs imports to esm syntax",
   "repository": {
     "type": "git",
-    "url": "https://github.com/HanseltimeIndustries/your-repo-here.git"
+    "url": "https://github.com/HanseltimeIndustries/es-import-modifier.git"
   },
   "types": "./dist/types/index.d.ts",
   "main": "./dist/cjs/index.js",
   "exports": {
     "types": "./dist/types/index.d.ts",
     "require": "./dist/cjs/index.js",
-    "import": "./dist/esm/index.js",
+    "import": "./dist/esm/index.mjs",
     "default": "./dist/esm/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "devDependencies": {
     "@commitlint/config-angular": "^18.4.3",
@@ -42,14 +43,16 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint .",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build:esm": "tsc -p tsconfig.esm.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json ",
+    "build:esm": "tsc -p tsconfig.esm.json && yarn swap-file-exts --dir dist/esm --from .js --to .mjs && yarn esm-import-resolve-extensions --dir dist/esm --ext .mjs",
     "build:types": "tsc -p tsconfig.types.json",
-    "build": "tsc -b tsconfig.cjs.json tsconfig.esm.json tsconfig.types.json",
+    "build": "yarn build:cjs && yarn build:esm && yarn build:types",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
-    "release": "yarn semantic-release"
+    "release": "yarn semantic-release",
+    "esm-import-resolve-extensions": "ts-node src/bin/esm-import-resolve-extensions.ts",
+    "swap-file-exts": "ts-node src/bin/swap-file-exts.ts"
   },
   "version": "1.0.0",
   "publishConfig": {
@@ -61,6 +64,7 @@
   "packageManager": "yarn@3.8.1",
   "dependencies": {
     "acorn": "^8.11.3",
-    "acorn-walk": "^8.3.2"
+    "acorn-walk": "^8.3.2",
+    "commander": "^12.0.0"
   }
 }

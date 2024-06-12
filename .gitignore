@@ -13,3 +13,5 @@
 dist/
 dist-bin/
 node_modules/
+
+tmp/
