@@ -1,5 +1,5 @@
 import { join } from "path"
-import { FAKE_ESM_DIR, FAKE_SWAP_DIR, TEMP_DIR } from "../testUtils"
+import { FAKE_SWAP_DIR, TEMP_DIR } from "../testUtils"
 import { copy } from "fs-extra"
 import { readdir, rm } from "fs/promises"
 import { swapFileExts } from "./swapFileExts"
