@@ -56,7 +56,7 @@
     "build:esm": "tsc -p tsconfig.esm.json && yarn swap-file-exts --dir dist/esm --from .js --to .mjs && yarn esm-import-resolve-extensions --dir dist/esm --ext .mjs",
     "build:types": "tsc -p tsconfig.types.json",
     "build": "yarn build:cjs && yarn build:esm && yarn build:types && yarn build-bin",
-    "build-bin": "esbuild src/bin/* --bundle --platform=node --target=node20 --outdir=dist-bin",
+    "build-bin": "esbuild src/bin/* --bundle --platform=node --target=node20 --outdir=dist-bin --banner:js=\"#!/usr/bin/env node\"",
     "postinstall": "husky install",
     "prepack": "pinst --disable",
     "postpack": "pinst --enable",
